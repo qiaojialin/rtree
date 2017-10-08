@@ -2,19 +2,15 @@ package com.github.davidmoten.rtree.geometry;
 
 public final class Point implements Rectangle {
 
-    private final float x;
-    private final float y;
+    private final double x;
+    private final double y;
 
-    private Point(float x, float y) {
+    private Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     static Point create(double x, double y) {
-        return new Point((float) x, (float) y);
-    }
-
-    static Point create(float x, float y) {
         return new Point(x, y);
     }
 
@@ -33,8 +29,8 @@ public final class Point implements Rectangle {
     }
 
     public double distanceSquared(Point p) {
-        float dx = x - p.x;
-        float dy = y - p.y;
+        double dx = x - p.x;
+        double dy = y - p.y;
         return dx * dx + dy * dy;
     }
 
@@ -43,11 +39,11 @@ public final class Point implements Rectangle {
         return r.x1() <= x && x <= r.x2() && r.y1() <= y && y <= r.y2();
     }
 
-    public float x() {
+    public double x() {
         return x;
     }
 
-    public float y() {
+    public double y() {
         return y;
     }
 
@@ -55,8 +51,8 @@ public final class Point implements Rectangle {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + Float.floatToIntBits(x);
-        result = prime * result + Float.floatToIntBits(y);
+        result = prime * result + Utils.hash(x);
+        result = prime * result + Utils.hash(y);
         return result;
     }
 
@@ -69,9 +65,9 @@ public final class Point implements Rectangle {
         if (getClass() != obj.getClass())
             return false;
         Point other = (Point) obj;
-        if (Float.floatToIntBits(x) != Float.floatToIntBits(other.x))
+        if (Utils.hash(x) != Utils.hash(other.x))
             return false;
-        if (Float.floatToIntBits(y) != Float.floatToIntBits(other.y))
+        if (Utils.hash(y) != Utils.hash(other.y))
             return false;
         return true;
     }
@@ -87,27 +83,27 @@ public final class Point implements Rectangle {
     }
 
     @Override
-    public float x1() {
+    public double x1() {
         return x;
     }
 
     @Override
-    public float y1() {
+    public double y1() {
         return y;
     }
 
     @Override
-    public float x2() {
+    public double x2() {
         return x;
     }
 
     @Override
-    public float y2() {
+    public double y2() {
         return y;
     }
 
     @Override
-    public float area() {
+    public double area() {
         return 0;
     }
 
@@ -123,12 +119,12 @@ public final class Point implements Rectangle {
     }
 
     @Override
-    public float intersectionArea(Rectangle r) {
+    public double intersectionArea(Rectangle r) {
         return 0;
     }
 
     @Override
-    public float perimeter() {
+    public double perimeter() {
         return 0;
     }
 
